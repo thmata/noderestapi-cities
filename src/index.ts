@@ -1,6 +1,5 @@
 import { server } from "./server/Server";
-const port = 3000;
 
-server.listen(port, () => {
-  console.log(`App Listening on port ${port}`);
+server.listen(process.env.NODE_ENV || 3333, () => {
+  console.log(`App Listening on port`);
 });
