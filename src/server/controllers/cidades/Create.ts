@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 
@@ -7,13 +7,11 @@ const bodyValidation = yup.object().shape({
   estado: yup.string().required().min(3),
 });
 
-export const create = async (req: Request, res: Response) => {
-  let validatedData = undefined;
-
+export const createBodyValidator: RequestHandler = async (req, res, next) => {
   try {
-    validatedData = await bodyValidation.validate(req.body, {
-      abortEarly: false,
-    });
+    // abortEarly como falso faz ele verificar todos os erros antes de disparar o erro, assim a gente consegue pegar todos os erros e não só o primeiro.
+    await bodyValidation.validate(req.body, { abortEarly: false });
+    return next();
   } catch (error) {
     const yupError = error as yup.ValidationError;
     const validationErros: Record<string, string> = {};
@@ -31,8 +29,10 @@ export const create = async (req: Request, res: Response) => {
       },
     });
   }
+};
 
-  console.log(validatedData, "Testando");
+export const create = async (req: Request, res: Response) => {
+  console.log(req.body);
 
   return res.send("Chegou");
 };
