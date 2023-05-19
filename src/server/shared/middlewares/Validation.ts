@@ -2,18 +2,19 @@ import { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import { Schema, ValidationError } from "yup";
 
-type TValidation = (
-  field: "body" | "header" | "params" | "query",
-  schema: Schema<any>
-) => RequestHandler;
+type TProperty = "body" | "header" | "params" | "query";
 
-export const validation: TValidation =
-  (field, schema) => async (req, res, next) => {
-    console.log("test");
+type TAllSchemas = Record<TProperty, Schema<any>>;
 
+type TValidation = (schemas: Partial<TAllSchemas>) => RequestHandler;
+
+export const validation: TValidation = (schemas) => async (req, res, next) => {
+  const errorsResult: Record<string, Record<string, string>> = {};
+
+  Object.entries(schemas).forEach(([key, schema]) => {
     try {
       // abortEarly como falso faz ele verificar todos os erros antes de disparar o erro, assim a gente consegue pegar todos os erros e não só o primeiro.
-      await schema.validate(req[field], { abortEarly: false });
+      schema.validateSync(req[key as TProperty], { abortEarly: false });
       return next();
     } catch (error) {
       const yupError = error as ValidationError;
@@ -26,10 +27,17 @@ export const validation: TValidation =
         validationErros[error.path] = error.message;
       });
 
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        errors: {
-          default: validationErros,
-        },
-      });
+      errorsResult[key] = validationErros;
     }
-  };
+  });
+
+  if (Object.entries(errorsResult).length === 0) {
+    return next();
+  } else {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: errorsResult,
+      },
+    });
+  }
+};
