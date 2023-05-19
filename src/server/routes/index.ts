@@ -6,7 +6,7 @@ const router = Router();
 
 router.post(
   "/cidades",
-  CidadesController.createBodyValidator,
+  CidadesController.createValidation,
   CidadesController.create
 );
 
