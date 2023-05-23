@@ -1,3 +1,4 @@
+// ARQUIVO DE TRADUÇÃO PARA RESPOSTAS DO YUP
 import { setLocale } from "yup";
 
 setLocale({

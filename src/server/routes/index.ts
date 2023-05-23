@@ -10,4 +10,10 @@ router.post(
   CidadesController.create
 );
 
+router.get(
+  "/cidades",
+  CidadesController.getAllValidation,
+  CidadesController.getAll
+);
+
 export { router };

@@ -24,6 +24,9 @@ export const validation: TValidation = (schemas) => async (req, res, next) => {
       yupError.inner.forEach((error) => {
         if (!error.path) return;
 
+        console.log(error.path, "Aqui tem o error path");
+        console.log(error.message, "Aqui tem o error message");
+
         validationErros[error.path] = error.message;
       });
 
