@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
 
-export const getAllValidation = validation({
+export const updateByIdValidation = validation({
   query: yup.object().shape({
     page: yup.number().notRequired().moreThan(0),
     limit: yup.number().notRequired().moreThan(0),
@@ -11,8 +11,8 @@ export const getAllValidation = validation({
   }),
 });
 
-export const getAll = async (req: Request, res: Response) => {
-  console.log(req.query);
+export const updateById = async (req: Request, res: Response) => {
+  console.log(req.params);
 
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Não Implementado");
 };

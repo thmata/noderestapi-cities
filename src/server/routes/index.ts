@@ -16,4 +16,10 @@ router.get(
   CidadesController.getAll
 );
 
+router.get(
+  "/cidades/:id",
+  CidadesController.getAllValidation,
+  CidadesController.getById
+);
+
 export { router };
