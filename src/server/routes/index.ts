@@ -18,8 +18,20 @@ router.get(
 
 router.get(
   "/cidades/:id",
-  CidadesController.getAllValidation,
+  CidadesController.getByIdValidation,
   CidadesController.getById
+);
+
+router.delete(
+  "/cidades/:id",
+  CidadesController.deleteByIdValidation,
+  CidadesController.deleteById
+);
+
+router.put(
+  "/cidades/:id",
+  CidadesController.updateByIdValidation,
+  CidadesController.updateById
 );
 
 export { router };

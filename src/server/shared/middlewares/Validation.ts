@@ -15,7 +15,6 @@ export const validation: TValidation = (schemas) => async (req, res, next) => {
     try {
       // abortEarly como falso faz ele verificar todos os erros antes de disparar o erro, assim a gente consegue pegar todos os erros e não só o primeiro.
       schema.validateSync(req[key as TProperty], { abortEarly: false });
-      return next();
     } catch (error) {
       const yupError = error as ValidationError;
       const validationErros: Record<string, string> = {};
@@ -33,6 +32,8 @@ export const validation: TValidation = (schemas) => async (req, res, next) => {
       errorsResult[key] = validationErros;
     }
   });
+
+  console.log(Object.entries(errorsResult).length, "errorsResult");
 
   if (Object.entries(errorsResult).length === 0) {
     return next();
