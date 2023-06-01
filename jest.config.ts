@@ -165,8 +165,9 @@ export default {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
+  // QUALQUER ARQUIVO QUER DER MATCH NO TESTMATCH ELE VAI SER TRATADO COM TS-JEST JÁ QUE A GNT ESTÁ USANDO TS
   transform: {
-    "^.+//.(ts|tsx)$": "ts-jest",
+    "^.+\\.(ts|tsx)$": "ts-jest",
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
