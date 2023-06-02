@@ -33,7 +33,7 @@ export const validation: TValidation = (schemas) => async (req, res, next) => {
     }
   });
 
-  console.log(Object.entries(errorsResult).length, "errorsResult");
+  console.log(errorsResult, "errorsResult");
 
   if (Object.entries(errorsResult).length === 0) {
     return next();
