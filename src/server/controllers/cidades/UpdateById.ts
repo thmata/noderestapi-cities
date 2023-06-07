@@ -13,8 +13,15 @@ export const updateByIdValidation = validation({
 });
 
 export const updateById = async (req: Request, res: Response) => {
-  console.log(req.params);
-  console.log(req.body);
+  if (Number(req.params) === 9999) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      errors: {
+        default: {
+          params: "Registro Não Encontrado.",
+        },
+      },
+    });
+  }
 
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Não Implementado");
+  return res.status(StatusCodes.NO_CONTENT).send("Não Implementado");
 };
