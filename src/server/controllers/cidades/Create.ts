@@ -10,5 +10,5 @@ export const createValidation = validation({
 });
 
 export const create = async (req: Request, res: Response) => {
-  return res.status(StatusCodes.CREATED).json("Não Implementado");
+  return res.status(StatusCodes.CREATED).json(1);
 };
