@@ -5,6 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
+    "production": "node ./build/index.js",
+    "postinstall": "tsc",
     "test": "jest"
   },
   "dependencies": {
@@ -25,5 +27,8 @@
     "supertest": "^6.3.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.4"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
