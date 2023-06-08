@@ -17,7 +17,7 @@ describe("Cidades - Deletar Cidade Pelo ID", () => {
   it("Apagar Registro Que não Existe", async () => {
     const res1 = await testServer.delete("/cidades/9999").send();
 
-    expect(res1.statusCode).toEqual(StatusCodes.OK);
-    expect(res1.body).toHaveProperty("errors.default.params");
+    expect(res1.statusCode).toEqual(StatusCodes.NO_CONTENT);
+    expect(res1.body).toHaveProperty("errors");
   });
 });

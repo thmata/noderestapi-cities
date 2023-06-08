@@ -14,7 +14,7 @@ export const updateByIdValidation = validation({
 
 export const updateById = async (req: Request, res: Response) => {
   if (Number(req.params) === 9999) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    return res.status(StatusCodes.NO_CONTENT).json({
       errors: {
         default: {
           params: "Registro Não Encontrado.",

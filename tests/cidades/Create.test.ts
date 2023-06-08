@@ -9,7 +9,7 @@ describe("Cidades - Create", () => {
       name: "Pernambuco",
     });
 
-    expect(res1.body).toEqual("Não Implementado"); //TODO EMPLEMENTAR QUANDO TIVER
+    expect(res1.body).toEqual(1);
     expect(res1.statusCode).toEqual(StatusCodes.CREATED);
   });
 

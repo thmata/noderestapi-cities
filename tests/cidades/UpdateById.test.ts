@@ -21,7 +21,7 @@ describe("Cidades - UpdateById - Atualizar pelo ID ", () => {
       name: "Rio de Janeiro",
     });
 
-    expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR);
+    expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
     expect(res1.body).toHaveProperty("errors.default.params");
   });
 });

@@ -13,6 +13,6 @@ describe("Cidades - GetAll - Retornar todas as Cidades.", () => {
 
     expect(Number(ResGetAll.header["x-total-count"])).toBeGreaterThan(0);
     expect(ResGetAll.statusCode).toEqual(StatusCodes.OK);
-    expect(ResGetAll.body.lenght).toBeGreaterThan(0);
+    expect(ResGetAll.body.length).toBeGreaterThan(0);
   });
 });
