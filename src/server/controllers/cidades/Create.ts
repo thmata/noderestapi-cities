@@ -22,6 +22,5 @@ export const create = async (req: Request, res: Response) => {
     });
   }
 
-
   return res.status(StatusCodes.CREATED).json(result);
 };
