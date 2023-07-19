@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
+import { GetById } from "../../providers/cidades/GetById";
 
 export const getByIdValidation = validation({
   params: yup.object().shape({
@@ -10,9 +11,17 @@ export const getByIdValidation = validation({
 });
 
 export const getById = async (req: Request, res: Response) => {
-  console.log(req.params);
 
-  if (Number(req.params) === 9999) {
+  const result = await GetById(Number(req.params.id))
+
+  console.log(result)
+
+  if(!(result instanceof Error)){
+    return res.status(StatusCodes.OK).json({
+      id: result.id,
+      name: result.name,
+    });
+  } else{
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
         default: {
@@ -21,9 +30,5 @@ export const getById = async (req: Request, res: Response) => {
       },
     });
   }
-
-  return res.status(StatusCodes.OK).json({
-    id: req.params.id,
-    name: "Pernambuco",
-  });
+  
 };
