@@ -4,10 +4,9 @@ import { ETableNames } from "../../ETableNames"
 export const create = async (cidade: any): Promise<number | Error> => {
 
     try{
-        const [result] = await Knex(ETableNames.cidade).insert(cidade).returning('id');
-
-        console.log([result])
         console.log(cidade)
+
+        const [result] = await Knex(ETableNames.cidade).insert(cidade).returning('id');
 
         if(typeof result === 'object') {
             return result.id

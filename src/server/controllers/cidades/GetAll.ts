@@ -17,6 +17,7 @@ export const getAll = async (req: Request, res: Response) => {
   // Essa linha ele seta o valor do x-total-count.
   res.setHeader("x-total-count", 1);
   console.log(req.query);
+  const { page, limit, filter } = req.query
 
   return res.status(StatusCodes.OK).json([
     {
