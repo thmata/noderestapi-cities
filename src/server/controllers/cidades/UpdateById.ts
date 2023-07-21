@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
+import { UpdateById } from "../../providers/cidades/UpdateById";
 
 export const updateByIdValidation = validation({
   body: yup.object().shape({
@@ -13,7 +14,12 @@ export const updateByIdValidation = validation({
 });
 
 export const updateById = async (req: Request, res: Response) => {
-  if (Number(req.params) === 9999) {
+
+  const result = await UpdateById(Number(req.params.id), req.body)
+
+  if(!(result instanceof Error)){
+    return res.status(StatusCodes.OK).send("Dado atualizado");
+  } else {
     return res.status(StatusCodes.NO_CONTENT).json({
       errors: {
         default: {
@@ -22,6 +28,4 @@ export const updateById = async (req: Request, res: Response) => {
       },
     });
   }
-
-  return res.status(StatusCodes.NO_CONTENT).send("Não Implementado");
 };
