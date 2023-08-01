@@ -3,7 +3,6 @@ import { Knex } from "../../database/knex"
 
 export const UpdateById = async (id: number, cidade: any) => {
     try{
-        console.log(cidade, "cidadecidadecidade")
         const result = await Knex(ETableNames.cidade).update(cidade).where('id', '=', id)
         if(result > 0) return true
 
@@ -15,4 +14,4 @@ export const UpdateById = async (id: number, cidade: any) => {
     }
 
 
-}
+}   
