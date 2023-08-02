@@ -11,17 +11,24 @@ export const getByIdValidation = validation({
 });
 
 export const getById = async (req: Request, res: Response) => {
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: {
+          params: "O parâmetro 'Id' precisa ser informado",
+        },
+      },
+    });
+  }
 
-  const result = await GetById(Number(req.params.id))
+  const result = await GetById(Number(req.params.id));
 
-  console.log(result)
-
-  if(!(result instanceof Error)){
+  if (!(result instanceof Error)) {
     return res.status(StatusCodes.OK).json({
       id: result.id,
       name: result.name,
     });
-  } else{
+  } else {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       errors: {
         default: {
@@ -30,5 +37,4 @@ export const getById = async (req: Request, res: Response) => {
       },
     });
   }
-  
 };

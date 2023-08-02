@@ -14,10 +14,19 @@ export const updateByIdValidation = validation({
 });
 
 export const updateById = async (req: Request, res: Response) => {
+  if (!req.params.id) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      errors: {
+        default: {
+          params: "O parâmetro 'Id' precisa ser informado",
+        },
+      },
+    });
+  }
 
-  const result = await UpdateById(Number(req.params.id), req.body)
+  const result = await UpdateById(Number(req.params.id), req.body);
 
-  if(!(result instanceof Error)){
+  if (!(result instanceof Error)) {
     return res.status(StatusCodes.OK).send("Dado atualizado");
   } else {
     return res.status(StatusCodes.NO_CONTENT).json({

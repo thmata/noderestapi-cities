@@ -8,10 +8,12 @@ export const GetAll = async (
   id = 0
 ) => {
   try {
+    console.log(filter, "FILTRO");
+
     const result = await Knex(ETableNames.cidade)
       .select("*")
       .where("id", Number(id))
-      .orWhere("nome", "like", `%${filter}%`) // Ou o nome seja igual ao nome aplicado no filtro. o % é para ignorar algumas condições.
+      .orWhere("name", "like", `%${filter}%`) // Ou o nome seja igual ao nome aplicado no filtro. o % é para ignorar algumas condições.
       .offset((page - 1) * limit) // A  qui diz qual é o que o ponto de partida que será iniciado.
       .limit(limit); // Quantidade limite de retorno
 
