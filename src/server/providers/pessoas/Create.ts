@@ -3,6 +3,14 @@ import { Knex } from "../../database/knex";
 
 export const create = async (pessoa: any) => {
   try {
+    // ANTES DE CRIAR UMA PESSOA VINCULADO A ALGUMA CIDADE ELE PRIMEIRO VALIDA SE ESSE CIDADE EXISTE.
+    const [{ count }] = await Knex(ETableNames.cidade)
+      .where("id", "=", pessoa.cidadeId)
+      .count<[{ count: number }]>("* as count");
+
+    if (count === 0)
+      return new Error("A Cidade usada no cadastro não foi encontrada.");
+
     const [result] = await Knex(ETableNames.pessoa)
       .insert(pessoa)
       .returning("id");
