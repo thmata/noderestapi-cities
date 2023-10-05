@@ -11,14 +11,12 @@ export const createValidation = validation({
 });
 
 export const create = async (req: Request, res: Response) => {
-
-  const result = await CidadeProviders.create(req.body)
-
-  if(result instanceof Error){
+  const result = await CidadeProviders.create(req.body);
+  if (result instanceof Error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      errors:{
-        default: result.message
-      }
+      errors: {
+        default: result.message,
+      },
     });
   }
 
