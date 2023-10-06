@@ -23,7 +23,7 @@ export const deleteById = async (req: Request, res: Response) => {
 
   const result = await DeleteById(Number(req.params.id));
 
-  if (result) {
+  if (result instanceof Error) {
     return res
       .status(StatusCodes.NO_CONTENT)
       .json(`ID: ${req.params} FOI DELETADO`);
