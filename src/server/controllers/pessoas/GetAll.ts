@@ -4,14 +4,14 @@ import * as yup from "yup";
 import { StatusCodes } from "http-status-codes";
 import { PessoasProviders } from "../../providers/pessoas";
 
-export const getAllValidation = {
+export const getAllValidation = validation({
   query: yup.object().shape({
     name: yup.string().notRequired().default(""),
-    lastname: yup.string().notRequired().default(""),
+    sobrenome: yup.string().notRequired().default(""),
     page: yup.number().integer().notRequired().moreThan(0).default(1),
     limit: yup.number().integer().notRequired().moreThan(0).default(7),
   }),
-};
+});
 
 export const getAll = async (req: Request, res: Response) => {
   const result = await PessoasProviders.getAll(
