@@ -4,8 +4,8 @@ import { Knex } from "../../database/knex";
 export const Count = async (name = "", sobrenome = "") => {
   try {
     const [{ count }] = await Knex(ETableNames.pessoa)
-      .where("name", name)
-      .andWhere("sobrenome", sobrenome)
+      .where("name", "like", `%${name}%`)
+      .andWhere("sobrenome", "like", `%${sobrenome}%`)
       .count<[{ count: number }]>("* as count");
 
     if (Number.isInteger(Number(count))) return Number(count);

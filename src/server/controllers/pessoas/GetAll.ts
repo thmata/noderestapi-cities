@@ -22,8 +22,8 @@ export const getAll = async (req: Request, res: Response) => {
   );
 
   const count = await PessoasProviders.Count(
-    String(req.query.name),
-    String(req.query.lastname)
+    String(req.query.name || ""),
+    String(req.query.lastname || "")
   );
 
   if (result instanceof Error) {
@@ -37,6 +37,8 @@ export const getAll = async (req: Request, res: Response) => {
       erros: { default: count.message },
     });
   }
+
+  console.log("Count", count);
 
   res.setHeader("access-control-expose-headers", "x-total-count");
   res.setHeader("x-total-count", count);

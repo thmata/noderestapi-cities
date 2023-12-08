@@ -7,6 +7,8 @@ export const DeleteById = async (id: number) => {
 
     if (result > 0) return result;
 
+    console.log("RESULT", result);
+
     return new Error("Erro ao apagar o registro");
   } catch (error) {
     console.log(error);
