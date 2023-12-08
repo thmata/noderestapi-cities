@@ -1,7 +1,7 @@
 import { ETableNames } from "../../ETableNames";
 import { Knex } from "../../database/knex";
 
-export const getById = async (id: number) => {
+export const GetById = async (id: number) => {
   try {
     const result = await Knex(ETableNames.pessoa)
       .select("*")

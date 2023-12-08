@@ -15,10 +15,10 @@ export const getAllValidation = validation({
 
 export const getAll = async (req: Request, res: Response) => {
   const result = await PessoasProviders.getAll(
-    Number(req.query.page),
-    Number(req.query.limit),
-    String(req.query.name),
-    String(req.query.lastname)
+    Number(req.query.page || 1),
+    Number(req.query.limit || 1),
+    String(req.query.name || ""),
+    String(req.query.lastname || "")
   );
 
   const count = await PessoasProviders.Count(
@@ -27,10 +27,12 @@ export const getAll = async (req: Request, res: Response) => {
   );
 
   if (result instanceof Error) {
+    console.log("Erro no Result/Pessoas");
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       erros: { default: result.message },
     });
   } else if (count instanceof Error) {
+    console.log("Erro GetAll Pessoas/Count");
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       erros: { default: count.message },
     });

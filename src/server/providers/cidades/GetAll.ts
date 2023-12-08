@@ -8,8 +8,6 @@ export const GetAll = async (
   id = 0
 ) => {
   try {
-    console.log(filter, "FILTRO");
-
     const result = await Knex(ETableNames.cidade)
       .select("*")
       .where("id", Number(id))

@@ -34,31 +34,31 @@ router.put(
 );
 
 router.post(
-  "/cidades",
+  "/pessoas",
   PessoasController.createValidation,
   PessoasController.create
 );
 
 router.get(
-  "/cidades",
+  "/pessoas",
   PessoasController.getAllValidation,
   PessoasController.getAll
 );
 
 router.get(
-  "/cidades/:id",
+  "/pessoas/:id",
   PessoasController.getByIdValidation,
   PessoasController.getById
 );
 
 router.delete(
-  "/cidades/:id",
+  "/pessoas/:id",
   PessoasController.deleteByIdValidation,
   PessoasController.deleteById
 );
 
 router.put(
-  "/cidades/:id",
+  "/pessoas/:id",
   PessoasController.updateByIdValidation,
   PessoasController.updateById
 );

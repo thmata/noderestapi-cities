@@ -33,11 +33,11 @@ export const validation: TValidation = (schemas) => async (req, res, next) => {
     }
   });
 
-  console.log(errorsResult, "errorsResult");
-
   if (Object.entries(errorsResult).length === 0) {
+    console.log("Validação OK");
     return next();
   } else {
+    console.log("Erro na Validação");
     return res.status(StatusCodes.BAD_REQUEST).json({
       errors: {
         default: errorsResult,
