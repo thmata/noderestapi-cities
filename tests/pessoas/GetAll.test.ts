@@ -1,13 +1,11 @@
 import { StatusCodes } from "http-status-codes";
 import { testServer } from "../jest.setup";
 
-describe("Cidades - GetAll - Retornar todas as Cidades.", () => {
-  it("Pegar Registros", async () => {
-    const res1 = await testServer.post("/cidades").send({
-      name: "Pernambuco",
-    });
+describe("Pessoas - GetAll - Retornar todas as Pessoas.", () => {
+  it("Apagar Registro", async () => {
+    const res1 = await testServer.get("/cidades").send({});
 
-    expect(res1.statusCode).toEqual(StatusCodes.CREATED);
+    expect(res1.statusCode).toEqual(StatusCodes.OK);
 
     const ResGetAll = await testServer.get("/cidades").send();
 
