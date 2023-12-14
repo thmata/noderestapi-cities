@@ -5,7 +5,7 @@ describe("Pessoas - Deletar Pessoa Pelo ID", () => {
   let cidadeId: number | undefined = undefined;
 
   beforeAll(async () => {
-    const resCidade = await testServer.post("/cidades").send({
+    const resCidade = await testServer.post("/cidade").send({
       nome: "Teste",
     });
 

@@ -5,11 +5,11 @@ import { Knex } from "../src/server/database/knex";
 
 // PARA FUNCIONAR OS TESTES JUNTO COM KNEX
 beforeAll(async () => {
-    await Knex.migrate.latest()
-})
+  await Knex.migrate.latest();
+});
 
 afterAll(async () => {
-    await Knex.destroy
-})
+  Knex.destroy;
+});
 
 export const testServer = supertest(server);

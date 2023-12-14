@@ -2,23 +2,44 @@ import { StatusCodes } from "http-status-codes";
 import { testServer } from "../jest.setup";
 
 describe("Cidades - UpdateById - Atualizar pelo ID ", () => {
+  let cidadeId: number | undefined = undefined;
+
+  beforeAll(async () => {
+    const res1 = await testServer.post("/cidades").send({
+      nome: "Teste",
+    });
+
+    cidadeId = res1.body;
+  });
+
   it("Atualizar Registro Por ID", async () => {
-    const res2 = await testServer.post("/cidades").send({
-      name: "Pernambuco",
+    const resPostPessoas = await testServer.post("/pessoas").send({
+      name: "Thiago",
+      sobrenome: "Mata",
+      email: "taiagomata@gmail.com",
+      cidadeId,
     });
 
-    expect(res2.statusCode).toEqual(StatusCodes.CREATED);
+    expect(resPostPessoas.statusCode).toEqual(StatusCodes.CREATED);
 
-    const res1 = await testServer.put(`/cidades/${res2.body}`).send({
-      name: "Rio de Janeiro",
-    });
+    const resPutUpdate = await testServer
+      .put(`/cidades/${resPostPessoas.body}`)
+      .send({
+        name: "Thiago",
+        sobrenome: "Oliveira",
+        email: "taiagomata@gmail.com",
+        cidadeId,
+      });
 
-    expect(res1.statusCode).toEqual(StatusCodes.NO_CONTENT);
+    expect(resPutUpdate.statusCode).toEqual(StatusCodes.NO_CONTENT);
   });
 
   it("Tentar Atualizar Registro que não existe", async () => {
-    const res1 = await testServer.put("/cidades/9999").send({
-      name: "Rio de Janeiro",
+    const res1 = await testServer.put("/pessoas/9999").send({
+      name: "Thiago",
+      sobrenome: "Ferreira",
+      email: "taiagomata@gmail.com",
+      cidadeId,
     });
 
     expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
