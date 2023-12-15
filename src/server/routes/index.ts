@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { CidadesController, PessoasController } from "./../controllers";
+import {
+  CidadesController,
+  PessoasController,
+  UsuariosController,
+} from "./../controllers";
 
 const router = Router();
 
@@ -61,6 +65,18 @@ router.put(
   "/pessoas/:id",
   PessoasController.updateByIdValidation,
   PessoasController.updateById
+);
+
+router.post(
+  "/entrar",
+  UsuariosController.signInValidation,
+  UsuariosController.SignIn
+);
+
+router.post(
+  "/cadastro",
+  UsuariosController.signUpValidation,
+  UsuariosController.SignUp
 );
 
 export { router };
