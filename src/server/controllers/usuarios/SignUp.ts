@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import { UsuariosProvider } from "../../providers/usuarios/index";
 import * as yup from "yup";
 
-export const signInValidation = validation({
+export const signUpValidation = validation({
   body: yup.object().shape({
     email: yup.string().required().min(6),
     password: yup.string().required().min(5),

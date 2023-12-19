@@ -74,7 +74,7 @@ router.post(
 );
 
 router.post(
-  "/cadastro",
+  "/cadastrar",
   UsuariosController.signUpValidation,
   UsuariosController.SignUp
 );
