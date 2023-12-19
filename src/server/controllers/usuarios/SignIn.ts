@@ -3,7 +3,7 @@ import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { UsuariosProvider } from "../../providers/usuarios/index";
 import * as yup from "yup";
-import { PasswordCrypto } from "../../shared/services";
+import { JWTService, PasswordCrypto } from "../../shared/services";
 
 export const signInValidation = validation({
   body: yup.object().shape({
@@ -37,8 +37,17 @@ export const SignIn = async (req: Request, res: Response) => {
       },
     });
   } else {
-    return res.status(StatusCodes.OK).json({ acessToken: "teste.teste.test" });
-  }
+    const accessToken = JWTService.sign({ uid: result.id });
+    if (accessToken === "JWT_SECRET_NOT_FOUND") {
+      if (result instanceof Error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+          errors: {
+            default: "Erro ao gerar o token de acesso",
+          },
+        });
+      }
+    }
 
-  return res.status(StatusCodes.OK).json(result);
+    return res.status(StatusCodes.OK).json({ acessToken: accessToken });
+  }
 };

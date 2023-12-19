@@ -11,6 +11,8 @@ export const getByIdValidation = validation({
 });
 
 export const getById = async (req: Request, res: Response) => {
+  console.log("IdUsuario", req.headers.idUsuario);
+
   if (!req.params.id) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       errors: {
