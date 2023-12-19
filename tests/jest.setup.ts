@@ -1,15 +1,15 @@
-import { server } from "../src/server/Server";
-
 import supertest from "supertest";
 import { Knex } from "../src/server/database/knex";
 
-// PARA FUNCIONAR OS TESTES JUNTO COM KNEX
+import { server } from "../src/server/Server";
+
 beforeAll(async () => {
   await Knex.migrate.latest();
+  await Knex.seed.run();
 });
 
 afterAll(async () => {
-  Knex.destroy;
+  await Knex.destroy();
 });
 
 export const testServer = supertest(server);
