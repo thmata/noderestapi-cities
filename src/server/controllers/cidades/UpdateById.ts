@@ -29,7 +29,8 @@ export const updateById = async (req: Request, res: Response) => {
   if (!(result instanceof Error)) {
     return res.status(StatusCodes.OK).send("Dado atualizado");
   } else {
-    return res.status(StatusCodes.NO_CONTENT).json({
+    console.log("Entrou");
+    return res.status(StatusCodes.BAD_REQUEST).json({
       errors: {
         default: {
           params: "Registro Não Encontrado.",

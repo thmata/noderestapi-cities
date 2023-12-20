@@ -13,9 +13,10 @@ export const ensureAuthenticated: RequestHandler = (req, res, next) => {
     });
   }
 
-  console.log(authorization);
-
   const [type, token] = authorization.split(" ");
+
+  console.log("Type", type);
+  console.log("token", token);
 
   if (type !== "Bearer") {
     return res.status(StatusCodes.UNAUTHORIZED).json({

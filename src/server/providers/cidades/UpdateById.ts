@@ -1,17 +1,18 @@
-import { ETableNames } from "../../ETableNames"
-import { Knex } from "../../database/knex"
+import { ETableNames } from "../../ETableNames";
+import { Knex } from "../../database/knex";
 
 export const UpdateById = async (id: number, cidade: any) => {
-    try{
-        const result = await Knex(ETableNames.cidade).update(cidade).where('id', '=', id)
-        if(result > 0) return true
+  try {
+    const result = await Knex(ETableNames.cidade)
+      .update(cidade)
+      .where("id", "=", id);
 
-        return new Error("Erro ao atualizar o registro.")
+    console.log("Update", result);
+    if (result > 0) return true;
 
-    }catch(error){
-        console.log(error, "ERo")
-        return new Error("Erro no UPDATE")
-    }
-
-
-}   
+    return new Error("Erro ao atualizar o registro.");
+  } catch (error) {
+    console.log(error, "ERo");
+    return new Error("Erro no UPDATE");
+  }
+};

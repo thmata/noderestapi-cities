@@ -48,6 +48,6 @@ export const SignIn = async (req: Request, res: Response) => {
       }
     }
 
-    return res.status(StatusCodes.OK).json({ acessToken: accessToken });
+    return res.status(StatusCodes.OK).json({ accessToken });
   }
 };

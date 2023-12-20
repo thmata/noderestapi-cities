@@ -80,14 +80,12 @@ router.put(
 
 router.post(
   "/entrar",
-  ensureAuthenticated,
   UsuariosController.signInValidation,
   UsuariosController.SignIn
 );
 
 router.post(
   "/cadastrar",
-  ensureAuthenticated,
   UsuariosController.signUpValidation,
   UsuariosController.SignUp
 );
